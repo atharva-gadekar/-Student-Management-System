@@ -10,6 +10,7 @@ import {
 	response_404,
 	response_500,
 } from "../utils/responseCodes";
+import {check, validationResult} from "express-validator";
 
 interface LoginRequestBody {
 	email: string;
@@ -32,7 +33,6 @@ interface AssignTaskRequestBody {
 
 
 //route : api/v1/admin/login
-
 export const loginAdmin = async (
 	req: Request<{}, {}, LoginRequestBody>,
 	res: Response
@@ -70,12 +70,24 @@ export const loginAdmin = async (
 	}
 };
 
+export const validateStudent = [
+	check("email", "Please include a valid email").isEmail(),
+	check(
+		"password",
+		"Please enter a password with 6 or more characters"
+	).isLength({ min: 6 }),
+];
 
 //route : api/v1/admin/add
 export const addStudent = async (
 	req: Request<{}, {}, AddStudentRequestBody>,
 	res: Response
 ) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return response_400(res, `Invalid input ` + errors.array());
+	}
+
 	const { name, email, department, password } = req.body;
 
 	try {
@@ -104,7 +116,6 @@ export const addStudent = async (
 		response_500(res, "Server error");
 	}
 };
-
 
 //route : api/v1/admin/createAdmin
 export const createAdmin = async (

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model";
+import {body} from "express-validator";
 import { Task, TaskStatus } from "../models/task.model";
 import {
 	response_200,

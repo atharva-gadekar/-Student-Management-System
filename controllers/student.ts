@@ -19,8 +19,9 @@ interface UpdateTaskRequestBody {
 	status: string;
 };
 
+//route : api/v1/student/login
 export const login = async (
-	req: Request<{email : string, password : string}, {}, LoginRequestBody>,
+	req: Request<{}, {}, LoginRequestBody>,
 	res: Response
 ) => {
 	try {
@@ -55,6 +56,7 @@ export const login = async (
 	}
 };
 
+//route : api/v1/student/getTasks/:userId
 export const getTasks = async (
 	req: Request<{ userId: string }>,
 	res: Response
@@ -76,8 +78,9 @@ export const getTasks = async (
 	}
 };
 
+//route : api/v1/student/update/:taskId
 export const updateTaskStatus = async (
-	req: Request<{ taskId: string, status : string }, {}, UpdateTaskRequestBody>,
+	req: Request<{taskId: string}, {}, UpdateTaskRequestBody>,
 	res: Response
 ) => {
 	try {

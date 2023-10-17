@@ -4,8 +4,8 @@ import { loginAdmin, addStudent, createAdmin, assignTask } from "../../../contro
 var adminRouter = Router();
 
 adminRouter.post("/login", loginAdmin);
-adminRouter.post("/addStudent", addStudent);
+adminRouter.post("/add", addStudent);
 adminRouter.post("/createAdmin", createAdmin);
-adminRouter.post("/assignTask", assignTask);
+adminRouter.post("/assign", assignTask);
 
 export default adminRouter;

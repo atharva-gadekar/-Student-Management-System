@@ -30,8 +30,11 @@ interface AssignTaskRequestBody {
 	description: string;
 }
 
+
+//route : api/v1/admin/login
+
 export const loginAdmin = async (
-	req: Request<{ email: string; password: string }, {}, LoginRequestBody>,
+	req: Request<{}, {}, LoginRequestBody>,
 	res: Response
 ) => {
 	const { email, password } = req.body;
@@ -67,8 +70,10 @@ export const loginAdmin = async (
 	}
 };
 
+
+//route : api/v1/admin/add
 export const addStudent = async (
-	req: Request<{name : string, email : string, department : string, password : string}, {}, AddStudentRequestBody>,
+	req: Request<{}, {}, AddStudentRequestBody>,
 	res: Response
 ) => {
 	const { name, email, department, password } = req.body;
@@ -100,8 +105,10 @@ export const addStudent = async (
 	}
 };
 
+
+//route : api/v1/admin/createAdmin
 export const createAdmin = async (
-    req: Request<{name : string, email : string, department : string, password : string}, {}, AddStudentRequestBody>,
+    req: Request<{}, {}, AddStudentRequestBody>,
     res: Response
 ) => {
     const { name, email, department, password } = req.body;
@@ -133,8 +140,9 @@ export const createAdmin = async (
     }
 }
 
+//route : api/v1/admin/assign
 export const assignTask = async (
-	req: Request<{studentId : string, taskName : string, dueDate : Date, description : string}, {}, AssignTaskRequestBody>,
+	req: Request<{}, {}, AssignTaskRequestBody>,
 	res: Response
 ) => {
 	const { studentId, taskName, dueDate, description } = req.body;

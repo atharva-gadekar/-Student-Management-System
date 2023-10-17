@@ -11,7 +11,7 @@ interface ExtendedRequest extends Request {
 }
 
 interface CustomJwtPayload extends JwtPayload {
-	username: string;
+	email: string;
 }
 
 const verifyUser = async (
@@ -30,6 +30,7 @@ const verifyUser = async (
 			tokenWithoutBearer,
 			process.env.JWT_SECRET!
 		) as CustomJwtPayload;
+		console.log(decoded);
 		const user = await User.findOne({ email: decoded.email });
 		if (!user) {
 			response_401(res, "Unauthorized");

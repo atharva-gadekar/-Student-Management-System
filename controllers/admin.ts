@@ -34,40 +34,43 @@ interface AssignTaskRequestBody {
 
 //route : api/v1/admin/login
 export const loginAdmin = async (
-	req: Request<{}, {}, LoginRequestBody>,
-	res: Response
+    req: Request<{}, {}, LoginRequestBody>,
+    res: Response
 ) => {
-	const { email, password } = req.body;
+    const { email, password } = req.body;
 
-	try {
-		const admin = await User.findOne({ email });
+    try {
+        const admin = await User.findOne({ email });
 
-		if (!admin || !admin.isAdmin) {
-			return response_404(res, "Admin not found");
-		}
+        if (!admin || !admin.isAdmin) {
+            return response_404(res, "Admin not found");
+        }
 
-		const isMatch = await bcrypt.compare(password, admin.password);
+        const isMatch = await bcrypt.compare(password, admin.password);
 
-		if (!isMatch) {
-			return response_400(res, "Invalid credentials");
-		}
+        if (!isMatch) {
+            return response_400(res, "Invalid credentials");
+        }
 
-		const token = jwt.sign(
-			{ username: admin.email },
-			process.env.JWT_SECRET!,
-			{ expiresIn: "1h" } 
-		);
+        const token = jwt.sign(
+            { email: admin.email },
+            process.env.JWT_SECRET!,
+            { expiresIn: "1h" } 
+        );
 
-		const response = {
-			admin,
-			token,
-		};
+        const response = {
+            id: admin._id,
+            name: admin.name,
+            email: admin.email,
+            department: admin.department,
+            token,
+        };
 
-		response_200(res, "Login successful", response);
-	} catch (error: unknown) {
-		console.error(error);
-		response_500(res, "Server error");
-	}
+        response_200(res, "Login successful", response);
+    } catch (error: unknown) {
+        console.error(error);
+        response_500(res, "Server error");
+    }
 };
 
 export const validateStudent = [
@@ -110,7 +113,14 @@ export const addStudent = async (
 
 		await newStudent.save();
 
-		response_201(res, "Student added successfully", newStudent);
+        const response = {
+            id: newStudent._id,
+            name: newStudent.name,
+            email: newStudent.email,
+            department: newStudent.department,
+        };
+
+		response_201(res, "Student added successfully", response);
 	} catch (error: unknown) {
 		console.error(error);
 		response_500(res, "Server error");
@@ -166,8 +176,8 @@ export const assignTask = async (
 		}
 
 		const newTask = new Task({
-			student: studentId,
-			taskName,
+			assignedTo: studentId,
+			title : taskName,
 			description,
 			dueDate,
 		});

@@ -46,9 +46,12 @@ export const login = async (
 				);
 
         const response = {
-            user,
-            token,
-        };
+					id: user._id,
+					name: user.name,
+					email: user.email,
+					department: user.department,
+					token,
+				};
 
 		response_200(res, "Login successful", response);
 	} catch (error: unknown) {
@@ -57,22 +60,37 @@ export const login = async (
 	}
 };
 
-//route : api/v1/student/getTasks/:userId
+//route : api/v1/student/tasks/:id
 export const getTasks = async (
-	req: Request<{ userId: string }>,
+	req: Request<{ id: string }>,
 	res: Response
 ) => {
 	try {
-		const { userId } = req.params;
-		const user = await User.findById(userId).populate("tasks");
+		const { id } = req.params;
+		var user = await User.findById(id).populate("tasks");
 
 		if (!user) {
 			return response_404(res, "User not found");
 		}
 
-		const tasks = user.tasks || [];
+        var tasks = user.tasks || [];
 
-		response_200(res, "Tasks fetched successfully", tasks);
+        for (let i = 0; i < tasks.length; i++) {
+            const taskId = tasks[i];
+            const task = await Task.findById(taskId);
+            const now = new Date();
+            const dueDate = new Date(task.dueDate);
+
+            if (now > dueDate) {
+                task.status = TaskStatus.OVERDUE;
+                await task.save();
+            }
+        }
+
+        user = await User.findById(id).populate("tasks");
+        tasks = user.tasks || [];
+
+        response_200(res, "Tasks fetched successfully", tasks);
 	} catch (error: unknown) {
 		console.error(error);
 		response_500(res, "Server error");

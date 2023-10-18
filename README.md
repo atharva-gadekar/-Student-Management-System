@@ -1,7 +1,13 @@
 # Student Management System - README
 
 ## Introduction
-The Student Management System is a platform that manages student data, tasks, and administrative functionalities. Built on a Node.js backend using the Express framework, the system provides separate functionalities for students and admins, secured with JWT (JSON Web Tokens) for authentication and authorization.
+The Student Management System is a platform that manages student data, tasks, and administrative functionalities. Built on a Node.js backend using the Express framework,  enhanced by TypeScript, the system provides separate functionalities for students and admins, secured with JWT (JSON Web Tokens) for authentication and authorization.
+
+The platform bifurcates into two primary interfaces:
+
+1. Administrative Interface: Tailored for faculty and administrative personnel, this interface enables effortless student registration, task assignments, and admin account creations.
+
+2. Student Interface: Geared towards students, this offers an intuitive platform to view tasks, manage profiles, and update statuses.
 
 ## Features
 1. **Admin Features**

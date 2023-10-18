@@ -39,8 +39,15 @@ const verifyUser = async (
 		req.user = user;
 		next();
 	} catch (err) {
-		console.log(err);
-		response_500(res, "Internal server error");
+		if (
+			err instanceof jwt.JsonWebTokenError ||
+			err instanceof jwt.TokenExpiredError
+		) {
+			response_401(res, "Unauthorized");
+		} else {
+			console.log(err);
+			response_500(res, "Internal server error");
+		}
 	}
 };
 
@@ -72,8 +79,15 @@ const verifyAdmin = async (
 		req.user = user;
 		next();
 	} catch (err) {
-		console.log(err);
-		response_500(res, "Internal server error");
+		if (
+			err instanceof jwt.JsonWebTokenError ||
+			err instanceof jwt.TokenExpiredError
+		) {
+			response_401(res, "Unauthorized");
+		} else {
+			console.log(err);
+			response_500(res, "Internal server error");
+		}
 	}
 };
 

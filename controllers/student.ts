@@ -40,7 +40,7 @@ export const login = async (
 		}
 
         const token = jwt.sign(
-					{ username: user.email },
+					{ email: user.email },
 					process.env.JWT_SECRET!,
 					{ expiresIn: "1h" }
 				);

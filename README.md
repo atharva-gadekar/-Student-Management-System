@@ -3,11 +3,11 @@
 ## Introduction
 The Student Management System is a platform that manages student data, tasks, and administrative functionalities. Built on a Node.js backend using the Express framework,  enhanced by TypeScript, the system provides separate functionalities for students and admins, secured with JWT (JSON Web Tokens) for authentication and authorization.
 
-The platform bifurcates into two primary interfaces:
+The platform has two main sections:
 
-1. Administrative Interface: Tailored for faculty and administrative personnel, this interface enables effortless student registration, task assignments, and admin account creations.
+1. Admin Section: For teachers and staff. It lets them easily add students, give tasks, and make new admin accounts.
 
-2. Student Interface: Geared towards students, this offers an intuitive platform to view tasks, manage profiles, and update statuses.
+2. Student Section: For students. They can see their tasks, change their profile details, and update task progress.
 
 ## Features
 1. **Admin Features**
@@ -110,7 +110,7 @@ The platform bifurcates into two primary interfaces:
 
 2. **Get Tasks**: `GET /api/v1/student/tasks/:id`
     - **Description**: This endpoint retrieves all the tasks assigned to a particular student. By providing the student's ID, the system will return a list of all associated tasks.
-    - `:id` - ID of the student for whom the tasks need to be fetched
+    - `:id` - ID of the student for whom the tasks need to be fetched.
 
 3. **Update Task Status**: `PATCH /api/v1/student/update/:taskId`
     - **Description**: Students can update the status of their tasks, indicating their progress or completion. The task status is updated in real-time for administrators to monitor.
@@ -135,7 +135,17 @@ The platform bifurcates into two primary interfaces:
 ## Installation & Setup
 1. Clone the repository.
 2. Run `npm install` to install dependencies.
-3. Set up environment variables as per the `.env.sample` file.
-4. Run the server using `npm start`.
+3. Set up environment variables as per the `.env.sample` file given by the user.
+4. Run the server using `nodemon`.
 5. Access the APIs using tools like Postman.
+
+## All the API details can be read using the following postman link.
+
+[https://documenter.getpostman.com/view/25553200/2s9Y5SVkcB](https://documenter.getpostman.com/view/25553200/2s9Y5SVkcB)
+
+## API hosted at.
+
+[https://social-app-api-fvee.onrender.com](https://social-app-api-fvee.onrender.com)
+
+
 

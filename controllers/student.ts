@@ -73,24 +73,34 @@ export const getTasks = async (
 			return response_404(res, "User not found");
 		}
 
-        var tasks = user.tasks || [];
+		var tasks = user.tasks || [];
 
-        for (let i = 0; i < tasks.length; i++) {
-            const taskId = tasks[i];
-            const task = await Task.findById(taskId);
-            const now = new Date();
-            const dueDate = new Date(task.dueDate);
+		for (let i = 0; i < tasks.length; i++) {
+			const taskId = tasks[i];
+			const task = await Task.findById(taskId);
+			const now = new Date();
+			const dueDate = new Date(task.dueDate);
 
-            if (now > dueDate) {
-                task.status = TaskStatus.OVERDUE;
-                await task.save();
-            }
-        }
+			if (now > dueDate) {
+				task.status = TaskStatus.OVERDUE;
+				await task.save();
+			}
+		}
 
-        user = await User.findById(id).populate("tasks");
-        tasks = user.tasks || [];
+		user = await User.findById(id).populate({ path: "tasks", model: Task });
+		tasks = user.tasks || [];
 
-        response_200(res, "Tasks fetched successfully", tasks);
+		const completedTasks = tasks.filter((task: any) => task.status === TaskStatus.COMPLETED);
+		const pendingTasks = tasks.filter((task: any) => task.status === TaskStatus.PENDING);
+		const overdueTasks = tasks.filter((task: any) => task.status === TaskStatus.OVERDUE);
+
+		const response = {
+			completedTasks,
+			pendingTasks,
+			overdueTasks
+		};
+
+		response_200(res, "Tasks fetched successfully", response);
 	} catch (error: unknown) {
 		console.error(error);
 		response_500(res, "Server error");

@@ -139,9 +139,12 @@ The platform has two main sections:
 4. Run the server using `npm run start`.
 5. Access the APIs using tools like Postman.
 
-## Deploment and Documentation
-- `The backend is deployed using my AWS EC2 instance at this link: `https://student-management-api.workwise.gq/api/v1/
-- `The detailed API documentation can be accessed at this link: https://documenter.getpostman.com/view/28165398/2s9YR86E2m`
+# Deployment and Documentation
+
+- **Backend Deployment:** The backend of this project has been deployed on an AWS EC2 instance. You can access it at the following link: [https://student-management-api.workwise.gq/api/v1/](https://student-management-api.workwise.gq/api/v1/)
+
+- **API Documentation:** For detailed API documentation, please visit the following link: [API Documentation](https://documenter.getpostman.com/view/28165398/2s9YR86E2m)
+
 
 ## All the API details can be read using the following postman link.
 

@@ -109,7 +109,7 @@ The platform has two main sections:
         ```
 
 2. **Get Tasks**: `GET /api/v1/student/tasks/:id`
-    - **Description**: This endpoint retrieves all the tasks assigned to a particular student. By providing the student's ID, the system will return a list of all associated tasks.
+    - **Description**: This endpoint retrieves all the tasks assigned to a particular student categorised by status. By providing the student's ID, the system will return a list of all associated tasks.
     - `:id` - ID of the student for whom the tasks need to be fetched.
 
 3. **Update Task Status**: `PATCH /api/v1/student/update/:taskId`
@@ -134,10 +134,14 @@ The platform has two main sections:
 
 ## Installation & Setup
 1. Clone the repository.
-2. Run `npm install` to install dependencies.
-3. Set up environment variables as per the `.env.sample` file given by the user.
-4. Run the server using `nodemon`.
+2. Build the code using `npm run build` to install dependencies.
+3. Please refer to the email which I have sent for the `.env` file.
+4. Run the server using `npm run start`.
 5. Access the APIs using tools like Postman.
+
+## Deploment and Documentation
+- `The backend is deployed using my AWS EC2 instance at this link: `https://student-management-api.workwise.gq/api/v1/
+- `The detailed API documentation can be accessed at this link: https://documenter.getpostman.com/view/28165398/2s9YR86E2m`
 
 ## All the API details can be read using the following postman link.
 
